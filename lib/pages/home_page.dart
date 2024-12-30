@@ -1,4 +1,5 @@
 import 'package:chatapp/Service/auth/auth_service.dart';
+import 'package:chatapp/components/my_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,23 +17,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  void signOut() {
-    final authService = Provider.of<AuthService>(context, listen: false);
-    authService.signOut();
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      drawer: MyDrawer(),
       appBar: AppBar(
         title: const Text("Homepage"),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: signOut,
-            icon: const Icon(Icons.exit_to_app),
-          ),
-        ],
+        backgroundColor: Colors.transparent,
+        elevation: 0
+        ,foregroundColor: Colors.grey,
+
       ),
       body: _buildUserList(),
     );
